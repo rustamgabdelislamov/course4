@@ -1,0 +1,46 @@
+{% extends 'users/base.html' %}
+{% load my_tags %}
+{% block title %}Каталог{% endblock %}
+{% block content %}
+
+<div class="container">
+    <div class="row text-center">
+    {% for client in client_list %}
+        <div class="col-4">
+            <div class="card mb-4 box-shadow">
+                <div class="card-header">
+                    <h1 class="my-0 font-weight-normal">{{ client.email }}</h1>
+                </div>
+                <div class="card-body">
+                    <h2 class="card-title pricing-card-title">{{ client.full_name }}</h2>
+                    <ul class="list-unstyled mt-3 mb-4 text-start m-3">
+                        <li>Описание: {{ client.comment | truncatechars:100 }}</li>
+                    </ul>
+                    {% if perms.product.can_unpublish_product or user == product.owner %}
+                    <button type="button" class="btn btn-lg btn-block btn-outline-danger" onclick="location.href='{% url 'clients:client_delete' client.pk %}'">Удалить</button>
+                    <button type="button" class="btn btn-lg btn-block btn-outline-primary" onclick="location.href='{% url 'clients:client_update' client.pk %}'">Редактировать</button>
+                    <button type="button" class="btn btn-lg btn-block btn-outline-primary" onclick="location.href='{% url 'clients:client_detail' client.pk %}'">Просмотреть</button>
+                    {% else %}
+                    <button type="button" class="btn btn-lg btn-block btn-outline-primary" onclick="location.href='#'">Просмотреть</button>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+</div>
+
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}">Назад</a>
+        {% endif %}
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">Вперед</a>
+        {% endif %}
+    </span>
+</div>
+{% endblock %}
