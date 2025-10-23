@@ -1,0 +1,25 @@
+{% extends 'users/base.html' %}
+{% load my_tags %}
+{% block title %}{{ letter.topic_letter }}{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row text-center">
+        <div class="col-12">
+            <div class="card mb-4 box-shadow">
+                <div class="card-header">
+                    <h1 class="my-0 font-weight-normal">{{ letter.topic_letter }}</h1>
+                </div>
+                <div class="card-body">
+                    <ul class="list-unstyled mt-3 mb-4 text-start m-3">
+                        <li>Сообщение: {{ letter.body_letter }}</li>
+                    </ul>
+                    <button type="button" class="btn btn-lg btn-block btn-outline-danger" onclick="location.href='{% url 'letter:letter_delete' letter.pk %}'">Удалить</button>
+                    <button type="button" class="btn btn-lg btn-block btn-outline-primary" onclick="location.href='{% url 'letter:letter_update' letter.pk %}'">Редактировать</button>
+
+                    <button type="button" class="btn btn-lg btn-block btn-outline-primary" onclick="location.href='{% url 'letter:letter_list' %}'">Назад</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

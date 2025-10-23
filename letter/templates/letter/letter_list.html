@@ -29,11 +29,11 @@
 <!--    {% endfor %}-->
 <!--    </div>-->
 <!--</div>-->
-<h1>Список клиентов</h1>
+<h1>Список сообщений</h1>
 <ul class="list-group">
-    {% for client in client_list %}
+    {% for letter in letter_list %}
         <li class="list-group-item">
-            <a href="{% url 'clients:client_detail' client.pk %}">{{ client.email }}</a> - {{ client.full_name}} - {{ client.comment }}
+            <a href="{% url 'letter:letter_detail' letter.pk %}">Тема письма: {{ letter.topic_letter }}</a>
         </li>
     {% endfor %}
 </ul>

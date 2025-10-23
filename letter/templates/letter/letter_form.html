@@ -1,0 +1,14 @@
+{% extends 'users/base.html' %}
+{% load my_tags %}
+{% block title %}Сообщение{% endblock %}
+{% block content %}
+
+<h2>Форма для сообщения</h2>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Сохранить</button>
+    <a href="{% url 'letter:letter_list' %}" class="btn btn-primary">Отмена</a>
+</form>
+
+{% endblock %}

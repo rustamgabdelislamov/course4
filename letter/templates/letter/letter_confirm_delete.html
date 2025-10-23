@@ -1,0 +1,13 @@
+{% extends 'users/base.html' %}
+{% load my_tags %}
+{% block title %}Сообщение{% endblock %}
+{% block content %}
+<h2>Удаление сообщения</h2>
+<p>Вы действительно хотите удалить {{ letter.topic_letter }} ?</p>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-danger">Удалить</button>
+    <a href="{% url 'letter:letter_list' %}" class="btn btn-primary">Отмена</a>
+</form>
+{% endblock %}

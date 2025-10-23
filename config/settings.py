@@ -52,6 +52,7 @@ INSTALLED_APPS = [
 
     'users',
     'clients',
+    'letter'
 ]
 
 MIDDLEWARE = [
@@ -157,3 +158,5 @@ if CACHE_ENABLED:
             'LOCATION': f'redis://{REDIS_HOST}:{REDIS_PORT}/1',
         }
     }
+
+LOGIN_REDIRECT_URL = '/'
