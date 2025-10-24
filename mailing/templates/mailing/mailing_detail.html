@@ -1,0 +1,22 @@
+{% extends 'users/base.html' %}
+{% load my_tags %}
+{% block title %}{{ mailing.name_mailing }}{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row text-center">
+        <div class="col-12">
+            <div class="card mb-4 box-shadow">
+                <div class="card-header">
+                    <h1 class="my-0 font-weight-normal">{{ mailing.name_mailing }}</h1>
+                </div>
+                <div class="card-body">
+                    <button type="button" class="btn btn-lg btn-block btn-outline-danger" onclick="location.href='{% url 'mailing:mailing_delete' mailing.pk %}'">Удалить</button>
+                    <button type="button" class="btn btn-lg btn-block btn-outline-primary" onclick="location.href='{% url 'mailing:mailing_update' mailing.pk %}'">Редактировать</button>
+                    <button type="button" class="btn btn-lg btn-block btn-outline-primary" onclick="location.href='{% url 'mailing:send_mailing' mailing.id %}'">Отправить</button>
+                    <button type="button" class="btn btn-lg btn-block btn-outline-primary" onclick="location.href='{% url 'mailing:mailing_list' %}'">Назад</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

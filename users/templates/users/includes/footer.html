@@ -8,11 +8,9 @@
             <div class="col-6 col-md">
                 <h5>Категории</h5>
                 <ul class="list-unstyled text-small">
-                    <li><a class="text-muted" href="#">Рассылки</a></li>
-                    <li><a class="text-muted" href="#">Телеграм боты</a></li>
-                    <li><a class="text-muted" href="#">Полезные утилиты</a></li>
-                    <li><a class="text-muted" href="#">Веб-приложения</a></li>
-                    <li><a class="text-muted" href="#">Микросервисы</a></li>
+                    <li><a class="text-muted" href="{% url 'mailing:mailing_list' %}">Рассылки</a></li>
+                    <li><a class="text-muted" href="{% url 'mailing:attempt_list' %}">Попытки рассылок</a></li>
+                    <li><a class="text-muted" href="{% url 'clients:clients_list' %}">Клиенты</a></li>
                 </ul>
             </div>
             <div class="col-6 col-md">

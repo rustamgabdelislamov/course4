@@ -8,7 +8,7 @@ urlpatterns = [
     path('', include("clients.urls", namespace="clients")),
     path('users/', include("users.urls", namespace="users")),
     path('letter/', include("letter.urls", namespace="letter")),
-
+    path('mailing/', include("mailing.urls", namespace="mailing")),
 ]
 
 if settings.DEBUG:
