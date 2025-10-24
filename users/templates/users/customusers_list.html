@@ -1,16 +1,9 @@
 {% load my_tags %}
 
-<div class="container">
-    <div class="row text-center">
+<ul class="list-group">
     {% for user in customusers_list %}
-        <div class="col-4">
-            <img src="{{ user.image | media_filter }}" class="img-fluid w-50">
-            <div class="card mb-4 box-shadow">
-                <div class="card-header">
-                    <h1 class="my-0 font-weight-normal">{{ user.email }}</h1>
-                </div>
-            </div>
-        </div>
+    <li class="list-group-item">
+        <a href="{% url 'users:users_detail' user.pk %}">{{ user.email }} {{ user.phone_number }}</a>
+    </li>
     {% endfor %}
-    </div>
-</div>
+</ul>

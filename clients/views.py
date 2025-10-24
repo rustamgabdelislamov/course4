@@ -1,4 +1,5 @@
 from django.contrib.auth import logout
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
@@ -8,15 +9,25 @@ from clients.models import Client
 
 
 
-class ClientListView(ListView):
+class ClientListView(LoginRequiredMixin, ListView):
     model = Client
     paginate_by = 3
 
+
+    def get_queryset(self):
+        # Показываем только клиентов, созданные текущим пользователем
+        return Client.objects.filter(owner=self.request.user)
 
 class ClientCreateView(CreateView):
     model = Client
     form_class = ClientForm
     success_url = reverse_lazy('clients:clients_list')
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+
 
     def form_valid(self, form):
         """Присваиваем при создании продукта id создателя"""

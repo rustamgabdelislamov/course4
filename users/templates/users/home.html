@@ -1,0 +1,11 @@
+{% extends 'users/base.html' %}
+{% block content %}
+<div class="container">
+    <div class="row text-center">
+    <h1>Статистика рассылок</h1>
+        <p>Количество рассылок всего: {{ total_mailings }}</p>
+        <p>Количество активных рассылок: {{ active_mailings }}</p>
+        <p>Количество уникальных клиентов: {{ unique_clients }}</p>
+    </div>
+</div>
+{% endblock %}

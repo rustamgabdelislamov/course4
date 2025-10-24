@@ -3,7 +3,8 @@ from django.urls import path
 
 
 from users.apps import UsersConfig
-from users.views import logout_view, RegisterView, UsersListView, UsersContactsView
+from users.views import logout_view, RegisterView, UsersListView, UsersContactsView, HomeView, UsersDetailView, \
+    UsersUpdateView
 
 app_name = UsersConfig.name
 
@@ -13,4 +14,8 @@ urlpatterns = [
     path('register/', RegisterView.as_view(),name='register'),
     path("list/", UsersListView.as_view(), name="users_list"),
     path("contacts/", UsersContactsView.as_view(), name="contacts"),
+    path("", HomeView.as_view(), name="home"),
+    path("detail/<int:pk>/", UsersDetailView.as_view(), name="users_detail"),
+    path("update/<int:pk>/", UsersUpdateView.as_view(), name="users_update"),
+
 ]

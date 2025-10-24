@@ -14,7 +14,12 @@ class Client(models.Model):
         on_delete=models.CASCADE,
         related_name='owners'
     )
-
+    is_active = models.BooleanField(
+        default=True,
+        verbose_name="Активность",
+        blank=True,
+        null=True,
+    )
     def __str__(self):
         return f"{self.email} {self.full_name}"
 

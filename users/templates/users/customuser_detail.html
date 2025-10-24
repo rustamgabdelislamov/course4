@@ -1,0 +1,21 @@
+{% extends 'users/base.html' %}
+{% load my_tags %}
+{% block title %}{{ client.email }}{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row text-center">
+        <div class="col-12">
+            <div class="card mb-4 box-shadow">
+                <div class="card-header">
+                    <h1 class="my-0 font-weight-normal">{{ users.email }}</h1>
+                </div>
+                <div class="card-body">
+                    <h2 class="card-title pricing-card-title">{{ users.phone_number }}</h2>
+                    <button type="button" class="btn btn-lg btn-block btn-outline-primary" onclick="location.href='{% url 'users:users_list' %}'">Назад</button>
+                    <button type="button" class="btn btn-lg btn-block btn-outline-primary" onclick="location.href='{% url 'users:users_update' users.pk%}'">Активность</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

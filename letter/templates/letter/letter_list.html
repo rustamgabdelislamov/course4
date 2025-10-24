@@ -33,7 +33,7 @@
 <ul class="list-group">
     {% for letter in letter_list %}
         <li class="list-group-item">
-            <a href="{% url 'letter:letter_detail' letter.pk %}">Тема письма: {{ letter.topic_letter }}</a>
+            <a href="{% url 'letter:letter_detail' letter.pk %}">Тема письма: {{ letter.topic_letter }} {{ letter.owner }}</a>
         </li>
     {% endfor %}
 </ul>

@@ -54,3 +54,9 @@ class CustomUserCreationForm(StyleFormMixin, UserCreationForm):
                 raise ValidationError(f'Можно загружать только файлы формата {", ".join(allowed_extensions)}')
 
         return image
+
+
+class CustomUserManagerForm(StyleFormMixin,forms.ModelForm):
+    class Meta:
+        model = CustomUser
+        fields = ['is_active']

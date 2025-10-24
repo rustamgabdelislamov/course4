@@ -6,7 +6,12 @@ class CustomUser(AbstractUser):
     phone_number = models.CharField(max_length=15, verbose_name='Телефон', blank=True, null=True, help_text='Необязательное поле. Введите номер телефона')
     image = models.ImageField(upload_to='users/image', verbose_name='Фото', blank=True, null=True)
     country = models.CharField(max_length=100,  verbose_name='Страна', blank=True, null=True,  help_text='Необязательное поле. Введите страну')
-
+    is_active = models.BooleanField(
+        default=True,
+        verbose_name="Активность",
+        blank=True,
+        null=True,
+    )
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
 
@@ -17,6 +22,9 @@ class CustomUser(AbstractUser):
         verbose_name = "пользователь"
         verbose_name_plural = "пользователи"
 
+        permissions = [
+            ("can_is_active", "Активность пользователя")
+        ]
 
 class Contacts(models.Model):
     name = models.CharField(max_length=100)

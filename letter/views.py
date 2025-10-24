@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
@@ -5,15 +6,19 @@ from letter.forms import LetterForm
 from letter.models import Letter
 
 
-class LetterListView(ListView):
+class LetterListView(LoginRequiredMixin, ListView):
     model = Letter
     paginate_by = 3
 
+    def get_queryset(self):
+        # Показываем только сообщения, созданные текущим пользователем
+        return Letter.objects.filter(owner=self.request.user)
 
-class LetterCreateView(CreateView):
+class LetterCreateView(LoginRequiredMixin, CreateView):
     model = Letter
     form_class = LetterForm
     success_url = reverse_lazy('letter:letter_list')
+
 
     def form_valid(self, form):
         """Присваиваем при создании продукта id создателя"""
@@ -23,11 +28,14 @@ class LetterCreateView(CreateView):
         return super().form_valid(form)
 
 
-class LetterUpdateView(UpdateView):
+class LetterUpdateView(UserPassesTestMixin, UpdateView):
     model = Letter
     form_class = LetterForm
     success_url = reverse_lazy('letter:letter_list')
 
+    def test_func(self):
+        # Проверяем, что текущий пользователь — владелец сообщения
+        return self.get_object().owner == self.request.user
     # permission_required = 'catalog.can_unpublish_product'
 
     # def get_form_class(self):
@@ -39,7 +47,7 @@ class LetterUpdateView(UpdateView):
     #     raise PermissionDenied
 
 
-class LetterDeleteView(DeleteView):
+class LetterDeleteView(LoginRequiredMixin, DeleteView):
     model = Letter
     success_url = reverse_lazy('letter:letter_list')
 
@@ -62,5 +70,5 @@ class LetterDeleteView(DeleteView):
     #     raise PermissionDenied
 
 
-class LetterDetailView(DetailView):
+class LetterDetailView(LoginRequiredMixin, DetailView):
     model = Letter

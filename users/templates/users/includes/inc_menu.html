@@ -16,7 +16,7 @@
         <a class="p-2 btn btn-outline-primary" href="{% url 'letter:letter_list' %}">Сообщения</a>
         <a class="p-2 btn btn-outline-primary" href="#">Контакты</a>
         <a class="p-2 btn btn-outline-primary" href="{% url 'users:login' %}">Войти</a>
-        <a class="p-2 btn btn-outline-primary" href="#">Регистрация</a>
+        <a class="p-2 btn btn-outline-primary" href="{% url 'users:register' %}">Регистрация</a>
         {% endif %}
     </nav>
 </div>

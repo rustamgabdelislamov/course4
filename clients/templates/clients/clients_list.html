@@ -33,7 +33,7 @@
 <ul class="list-group">
     {% for client in client_list %}
         <li class="list-group-item">
-            <a href="{% url 'clients:client_detail' client.pk %}">{{ client.email }}</a> - {{ client.full_name}} - {{ client.comment }}
+            <a href="{% url 'clients:client_detail' client.pk %}">{{ client.email }}</a> - {{ client.full_name}} - {{ client.comment }} - {{ client.owner }}
         </li>
     {% endfor %}
 </ul>
